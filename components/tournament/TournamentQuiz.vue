@@ -97,7 +97,7 @@
         // // Seçilmeyen eleman listeden çıkarıldıktan sonra bu kontrol yapılmalı. Eğer kalan eleman sayısı 2den büyükse ya da eşitse eşleşmeler devam etmeli
         if (items.length >= 2) {
           // Ekrana yeniden iki random seçenek getir
-          this.randomizeItems(this.quizItems, 2)
+          this.randomizeItems(this.quizItems, num)
         }
         // Son eşleşme de sonuçlandıysa quizItem'ın içinde kalan son elemanı da sil. Ekrandaki son kalan optionları temizle
         else {
@@ -121,7 +121,7 @@
             this.optionB = null
 
             if (this.quizItems.length > 0) {
-              this.randomizeItems(this.quizItems, 2)
+              this.randomizeItems(this.quizItems, num)
             }
           }
           // Eğer en son bir eleman kaldıysa o eleman son kalan yani şampiyon demektir
