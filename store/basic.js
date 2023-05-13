@@ -33,9 +33,6 @@ export const state = () => ({
             ],
             status: true,
         }
-    ],
-    quizzes: [
-
     ]
 })
 
