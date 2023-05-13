@@ -54,7 +54,7 @@
   import { mapState, mapGetters, mapActions } from 'vuex'
 
   export default {
-    name: 'Homepage',
+    name: 'TournamentComp',
     data() {
       return {
         optionA: null,

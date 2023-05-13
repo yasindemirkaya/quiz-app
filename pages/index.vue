@@ -1,24 +1,33 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-md-12 d-flex justify-content-center align-items-center flex-column mt-3">
-        <h1>Quiz App</h1>
+      <div class="col-md-12 d-flex flex-column justify-content-center align-items-center mt-3">
+        <!-- Title -->
+        <div class="row">
+          <div class="col-md-12">
+            <h1>Quiz App</h1>
+          </div>
+        </div>
 
-        <div class="col-md-12 d-flex justify-content-center">
+        <div class="row">
           <!-- Basic -->
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Basic</h5>
-              <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-              <NuxtLink to="/basic" class="btn btn-primary">Go</NuxtLink>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Basic</h5>
+                <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                <NuxtLink to="/basic" class="btn btn-primary">Go</NuxtLink>
+              </div>
             </div>
           </div>
           <!-- Tournament -->
-          <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Tournament</h5>
-              <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-              <NuxtLink to="/tournament" class="btn btn-primary">Go</NuxtLink>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Tournament</h5>
+                <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                <NuxtLink to="/tournament" class="btn btn-primary">Go</NuxtLink>
+              </div>
             </div>
           </div>
         </div>

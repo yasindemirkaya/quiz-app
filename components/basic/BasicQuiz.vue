@@ -127,7 +127,7 @@
   import { mapState, mapGetters, mapActions } from 'vuex'
 
   export default {
-    name: 'BasicQuiz',
+    name: 'BasicQuizComp',
     data() {
       return {
         question: null,
