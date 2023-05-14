@@ -2,7 +2,9 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 d-flex justify-content-center align-items-center flex-column mt-15rem">
-        <h1>Tournament App</h1>
+        <h1>{{tournamentDetails.title}}</h1>
+        <p>{{ tournamentDetails.description }}</p>
+        <p>Category: {{ tournamentDetails.category }}</p>
 
         <!-- Tournament Items -->
         <div class="row">
@@ -68,10 +70,10 @@
       }
     },
     computed: {
-      ...mapGetters('tournament', ['tournamentItems'])
+      ...mapGetters('tournament', ['tournamentItems', 'tournamentDetails'])
     },
     methods: {
-      ...mapActions('tournament', ['setTournamentItems', 'getTournamentItems', 'clearTournamentItems']),
+      ...mapActions('tournament', ['setTournamentItems', 'getTournamentItems', 'clearTournamentItems', 'getTournamentDetails', 'setTournamentDetails']),
       randomizeItems(items, num) {
         // Seçeneklerin içi önceden dolu ise temizle
         this.optionA = null;
@@ -138,8 +140,12 @@
       // Sorular döndüğünde store'daki state'i güncelliyorum
       let request = 1
       let tournamentItems = await this.getTournamentItems(request)
-      if (tournamentItems) {
+
+      let tournamentDetails = await this.getTournamentDetails(request)
+
+      if (tournamentItems && tournamentDetails) {
         this.$store.commit('tournament/setTournamentItems', tournamentItems)
+        this.$store.commit('tournament/setTournamentDetails', tournamentDetails)
 
         // Quizin başlangıçta kaç elemanlı olduğunu tut
         this.tournamentLength = tournamentItems.length;
