@@ -2,7 +2,9 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 d-flex justify-content-center flex-column align-items-center mt-8rem">
-        <h1 class="mt-3 mb-3">Quiz Name</h1>
+        <h1 class="mt-3 mb-3">{{ quizDetails.title }}</h1>
+        <p>{{ quizDetails.description }}</p>
+        <p>Category: {{ quizDetails.category }}</p>
 
         <div class="row mb-3" v-if="isLastQuestion && !isQuizEnded">
           <div class="col-md-12">
@@ -153,13 +155,13 @@
       }
     },
     computed: {
-      ...mapGetters('basic', ['quiz'])
+      ...mapGetters('basic', ['questions', 'quizDetails'])
     },
     methods: {
-      ...mapActions('basic', ['setQuiz', 'getQuiz']),
+      ...mapActions('basic', ['setQuestions', 'getQuestions', 'setQuizDetails', 'getQuizDetails']),
       // Soruyu cevapla
       answerTheQuestion(answer, questionID, options, question) {
-        console.log('Answer: ', answer)
+        // console.log('Answer: ', answer)
 
         // Eğer soru cevaplandıysa timer'ı durdur
         this.timer = 45;
@@ -211,10 +213,10 @@
         }
       },
       // Soruları hazırla
-      prepareTheQuestions(quiz) {
-        if (quiz) {
+      prepareTheQuestions(questions) {
+        if (questions) {
           // Soruların arasından rastgele birini seç
-          let randomQuestion = quiz[Math.floor((Math.random() * quiz.length))]
+          let randomQuestion = questions[Math.floor((Math.random() * questions.length))]
 
           // Ekranda gösterilecek soruyu ve şıkları hazırla, sorunun ID'sini tut (Hangi soruya hangi cevabın verildiğini tutabilmek için.)
           this.question = randomQuestion.text
@@ -222,11 +224,11 @@
           this.options = randomQuestion.answers
 
           // Seçilen sorunun tekrar gelmemesi için listeden soruyu çıkar        
-          quiz = quiz.filter(question => question !== randomQuestion)
-          this.$store.commit('basic/setQuiz', quiz)
+          questions = questions.filter(question => question !== randomQuestion)
+          this.$store.commit('basic/setQuestions', questions)
 
           // Son soruya gelip gelmediğini kontrol et
-          if (quiz.length < 1) {
+          if (questions.length < 1) {
             this.isLastQuestion = true
           }
         }
@@ -237,15 +239,15 @@
         this.correct = false
         this.wrong = false
         this.isAnswered = false
-        this.timer = 5
+        this.timer = 45
         this.isTimeOut = false
-        this.quiz = null
+        this.question = null
         this.options = null
 
-        this.prepareTheQuestions(this.quiz)
+        this.prepareTheQuestions(this.questions)
       },
       calculateStatistics(userAnswers) {
-        console.log('user answers: ', userAnswers)
+        // console.log('user answers: ', userAnswers)
         this.answerSheet = true;
         for (var i = 0; i < userAnswers.length; i++) {
           if (userAnswers[i].answer.isCorrect == 'Correct') {
@@ -283,16 +285,23 @@
       // Method 1 gönderildiğinde questionsı return edecek şekilde hazırlanmış.
       // Sorular döndüğünde store'daki state'i güncelliyorum
       let request = 1
-      let quiz = await this.getQuiz(request)
-      if (quiz) {
-        this.$store.commit('basic/setQuiz', quiz)
+      let questions = await this.getQuestions(request)
+
+      let quizDetails = await this.getQuizDetails(request)
+
+      console.log('QUESTIONS: ', questions)
+      console.log('QUIZ DETAILS: ', quizDetails)
+
+      if (questions && quizDetails) {
+        this.$store.commit('basic/setQuizDetails', quizDetails)
+        this.$store.commit('basic/setQuestions', questions)
       }
-      if (this.quiz) {
+      if (this.questions) {
         // Açılışta soru sayısını elde et
-        this.statistics.totalNumOfQuestions = this.quiz.length
+        this.statistics.totalNumOfQuestions = this.questions.length
 
         // Sayfa açılırken soruları hazırla
-        this.prepareTheQuestions(this.quiz)
+        this.prepareTheQuestions(this.questions)
       }
     }
   }
