@@ -16,11 +16,13 @@
     "bootstrap-vue": "^2.23.1",
     "core-js": "^3.25.3",
     "nuxt": "^2.15.8",
+    "secure-ls": "^1.2.6",
     "vue": "^2.7.10",
     "vue-server-renderer": "^2.7.10",
     "vue-template-compiler": "^2.7.10",
     "vue-toastification": "^1.7.14",
-    "vuelidate": "^0.7.7"
+    "vuelidate": "^0.7.7",
+    "vuex-persistedstate": "^3.2.1"
   },
   "devDependencies": {
     "eslint-config-prettier": "^8.5.0",
