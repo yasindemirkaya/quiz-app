@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-md-12 d-flex flex-column justify-content-center align-items-center mt-3">
+      <div class="col-md-12 d-flex flex-column justify-content-center align-items-center mt-15rem">
         <!-- Title -->
         <div class="row">
           <div class="col-md-12">
@@ -39,14 +39,5 @@
 <script>
   export default {
     name: 'Homepage',
-    data() {
-      return {
-      }
-    },
-    methods: {
-    },
   }
 </script>
-
-<style>
-</style>

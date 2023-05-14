@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-md-12 d-flex justify-content-center flex-column align-items-center">
+      <div class="col-md-12 d-flex justify-content-center flex-column align-items-center mt-8rem">
         <h1 class="mt-3 mb-3">Quiz Name</h1>
 
         <div class="row mb-3" v-if="isLastQuestion && !isQuizEnded">
@@ -10,7 +10,7 @@
           </div>
         </div>
         <!-- Question -->
-        <div class="card" style="width: 60rem;" v-if="!isQuizEnded">
+        <div class="card w-75" v-if="!isQuizEnded">
           <div class="card-body">
             <div class="row">
               <div class="col-md-12">
@@ -55,7 +55,7 @@
           </div>
         </div>
         <!-- Quiz Ended -->
-        <div class="card" style="width:60rem;" v-else>
+        <div class="card w-75" v-else>
           <div class="card-body">
             <div class="row">
               <div class="col-md-12">

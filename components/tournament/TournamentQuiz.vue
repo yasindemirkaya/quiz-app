@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-md-12 d-flex justify-content-center align-items-center flex-column mt-3">
+      <div class="col-md-12 d-flex justify-content-center align-items-center flex-column mt-15rem">
         <h1>Tournament App</h1>
 
         <!-- Quiz Items -->

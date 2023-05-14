@@ -8,6 +8,7 @@
   import BasicQuiz from '~/components/basic/BasicQuiz.vue'
   export default {
     name: 'BasicPage',
+    layout: 'withoutFooter',
     components: {
       BasicQuiz
     }

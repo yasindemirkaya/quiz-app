@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <!-- Header -->
-      <div class="col-md-12 d-flex flex-column justify-content-center align-items-center mt-5">
+      <div class="col-md-12 d-flex flex-column justify-content-center align-items-center mt-15rem">
         <h1>Forgot your password?</h1>
         <p>Enter your email address to have a new password.</p>
       </div>
