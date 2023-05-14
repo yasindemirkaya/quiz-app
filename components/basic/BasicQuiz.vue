@@ -153,10 +153,10 @@
       }
     },
     computed: {
-      ...mapGetters('basic', ['questions'])
+      ...mapGetters('basic', ['quiz'])
     },
     methods: {
-      ...mapActions('basic', ['setQuestions', 'getQuestions']),
+      ...mapActions('basic', ['setQuiz', 'getQuiz']),
       // Soruyu cevapla
       answerTheQuestion(answer, questionID, options, question) {
         console.log('Answer: ', answer)
@@ -211,10 +211,10 @@
         }
       },
       // Soruları hazırla
-      prepareTheQuestions(questions) {
-        if (questions) {
+      prepareTheQuestions(quiz) {
+        if (quiz) {
           // Soruların arasından rastgele birini seç
-          let randomQuestion = questions[Math.floor((Math.random() * questions.length))]
+          let randomQuestion = quiz[Math.floor((Math.random() * quiz.length))]
 
           // Ekranda gösterilecek soruyu ve şıkları hazırla, sorunun ID'sini tut (Hangi soruya hangi cevabın verildiğini tutabilmek için.)
           this.question = randomQuestion.text
@@ -222,11 +222,11 @@
           this.options = randomQuestion.answers
 
           // Seçilen sorunun tekrar gelmemesi için listeden soruyu çıkar        
-          questions = questions.filter(question => question !== randomQuestion)
-          this.$store.commit('basic/setQuestions', questions)
+          quiz = quiz.filter(question => question !== randomQuestion)
+          this.$store.commit('basic/setQuiz', quiz)
 
           // Son soruya gelip gelmediğini kontrol et
-          if (questions.length < 1) {
+          if (quiz.length < 1) {
             this.isLastQuestion = true
           }
         }
@@ -239,10 +239,10 @@
         this.isAnswered = false
         this.timer = 5
         this.isTimeOut = false
-        this.question = null
+        this.quiz = null
         this.options = null
 
-        this.prepareTheQuestions(this.questions)
+        this.prepareTheQuestions(this.quiz)
       },
       calculateStatistics(userAnswers) {
         console.log('user answers: ', userAnswers)
@@ -283,16 +283,16 @@
       // Method 1 gönderildiğinde questionsı return edecek şekilde hazırlanmış.
       // Sorular döndüğünde store'daki state'i güncelliyorum
       let request = 1
-      let questions = await this.getQuestions(request)
-      if (questions) {
-        this.$store.commit('basic/setQuestions', questions)
+      let quiz = await this.getQuiz(request)
+      if (quiz) {
+        this.$store.commit('basic/setQuiz', quiz)
       }
-      if (this.questions) {
+      if (this.quiz) {
         // Açılışta soru sayısını elde et
-        this.statistics.totalNumOfQuestions = this.questions.length
+        this.statistics.totalNumOfQuestions = this.quiz.length
 
         // Sayfa açılırken soruları hazırla
-        this.prepareTheQuestions(this.questions)
+        this.prepareTheQuestions(this.quiz)
       }
     }
   }

@@ -13,6 +13,10 @@
           <b-nav-item v-for="item in leftMenu" :key="item.id">
             <NuxtLink :to="item.link" class="text-decoration-none text-light">{{item.name}}</NuxtLink>
           </b-nav-item>
+          <!-- Create Quiz -->
+          <b-nav-item v-if="isLoggedIn">
+            <NuxtLink to="/create-quiz" class="text-decoration-none text-light">Create Quiz</NuxtLink>
+          </b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->

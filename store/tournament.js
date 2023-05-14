@@ -1,5 +1,5 @@
 export const state = () => ({
-    quizItems: [
+    tournamentItems: [
         { id: 1, name: 'Item 1' },
         { id: 2, name: 'Item 2' },
         { id: 3, name: 'Item 3' },
@@ -20,18 +20,18 @@ export const state = () => ({
 })
 
 export const mutations = {
-    setQuizItems(state, payload) {
-        state.quizItems = payload
+    setTournamentItems(state, payload) {
+        state.tournamentItems = payload
     },
-    clearQuizItems(state) {
-        state.quizItems = []
+    clearTournamentItems(state) {
+        state.tournamentItems = []
     },
 }
 
 export const actions = {
-    async getQuizItems({ dispatch, commit, getters, state }, payload) {
+    async getTournamentItems({ dispatch, commit, getters, state }, payload) {
         if (payload == 1) {
-            let quizItems = [
+            let tournamentItems = [
                 { id: 1, name: 'Item 1' },
                 { id: 2, name: 'Item 2' },
                 { id: 3, name: 'Item 3' },
@@ -49,7 +49,7 @@ export const actions = {
                 { id: 15, name: 'Item 15' },
                 { id: 16, name: 'Item 16' },
             ]
-            return quizItems
+            return tournamentItems
         } else {
             return false
         }
@@ -57,5 +57,5 @@ export const actions = {
 }
 
 export const getters = {
-    quizItems: (state) => state.quizItems,
+    tournamentItems: (state) => state.tournamentItems,
 }

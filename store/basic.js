@@ -1,5 +1,5 @@
 export const state = () => ({
-    questions: [
+    quiz: [
         {
             id: 1,
             text: 'Question 1 text will be here...',
@@ -37,15 +37,15 @@ export const state = () => ({
 })
 
 export const mutations = {
-    setQuestions(state, payload) {
-        state.questions = payload
+    setQuiz(state, payload) {
+        state.quiz = payload
     }
 }
 
 export const actions = {
-    async getQuestions({ dispatch, commit, getters, state }, payload) {
+    async getQuiz({ dispatch, commit, getters, state }, payload) {
         if (payload == 1) {
-            let questions = [
+            let quiz = [
                 {
                     id: 1,
                     text: 'Question 1 text will be here...',
@@ -80,7 +80,7 @@ export const actions = {
                     status: true,
                 }
             ]
-            return questions
+            return quiz
         } else {
             return false
         }
@@ -88,5 +88,5 @@ export const actions = {
 }
 
 export const getters = {
-    questions: (state) => state.questions
+    quiz: (state) => state.quiz
 }

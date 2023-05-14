@@ -4,7 +4,7 @@
       <div class="col-md-12 d-flex justify-content-center align-items-center flex-column mt-15rem">
         <h1>Tournament App</h1>
 
-        <!-- Quiz Items -->
+        <!-- Tournament Items -->
         <div class="row">
           <!-- Round -->
           <div class="col-md-12 d-flex flex-column justify-content-center align-items-center mb-3">
@@ -19,7 +19,7 @@
                   <div class="card-body">
                     <h5 class="card-title">Card title</h5>
                     <p class="card-text">{{ optionA.name }}</p>
-                    <a href="#" class="btn btn-primary" @click="selectOption(quizItems, optionA, optionB)">Select</a>
+                    <a href="#" class="btn btn-success" @click="selectOption(tournamentItems, optionA, optionB)">Select</a>
                   </div>
                 </div>
               </div>
@@ -29,7 +29,7 @@
                   <div class="card-body">
                     <h5 class="card-title">Card title</h5>
                     <p class="card-text">{{ optionB.name }}</p>
-                    <a href="#" class="btn btn-primary" @click="selectOption(quizItems, optionB, optionA)">Select</a>
+                    <a href="#" class="btn btn-success" @click="selectOption(tournamentItems, optionB, optionA)">Select</a>
                   </div>
                 </div>
               </div>
@@ -64,20 +64,20 @@
         champion: null,
         round: 1,
         totalNumOfRounds: null,
-        quizLength: null
+        tournamentLength: null
       }
     },
     computed: {
-      ...mapGetters('tournament', ['quizItems'])
+      ...mapGetters('tournament', ['tournamentItems'])
     },
     methods: {
-      ...mapActions('tournament', ['setQuizItems', 'getQuizItems', 'clearQuizItems']),
+      ...mapActions('tournament', ['setTournamentItems', 'getTournamentItems', 'clearTournamentItems']),
       randomizeItems(items, num) {
         // Seçeneklerin içi önceden dolu ise temizle
         this.optionA = null;
         this.optionB = null;
 
-        // Quiz itemları arasından rastgele 2 item getir
+        // Tournament itemları arasından rastgele 2 item getir
         if (items.length > 1) {
           const shuffled = [...items].sort(() => 0.5 - Math.random())
 
@@ -92,36 +92,36 @@
         // Seçileni ve seçilmeyeni listeden kaldır
         items = items.filter(item => item !== selectedOption)
         items = items.filter(item => item !== otherOption)
-        this.$store.commit('tournament/setQuizItems', items)
+        this.$store.commit('tournament/setTournamentItems', items)
 
         // // Seçilmeyen eleman listeden çıkarıldıktan sonra bu kontrol yapılmalı. Eğer kalan eleman sayısı 2den büyükse ya da eşitse eşleşmeler devam etmeli
         if (items.length >= 2) {
           // Ekrana yeniden iki random seçenek getir
-          this.randomizeItems(this.quizItems, num)
+          this.randomizeItems(this.tournamentItems, 2)
         }
-        // Son eşleşme de sonuçlandıysa quizItem'ın içinde kalan son elemanı da sil. Ekrandaki son kalan optionları temizle
+        // Son eşleşme de sonuçlandıysa tournamentItem'ın içinde kalan son elemanı da sil. Ekrandaki son kalan optionları temizle
         else {
-          this.$store.commit('tournament/clearQuizItems')
+          this.$store.commit('tournament/clearTournamentItems')
 
-          // Eğer ilk tur bitti ise quizItems listesinin içi boş demektir.
-          // Bir sonraki tura gönderdiğimiz elemnanlar ile tekrar quizItems listesini dolduruyoruz
+          // Eğer ilk tur bitti ise tournamentItems listesinin içi boş demektir.
+          // Bir sonraki tura gönderdiğimiz elemnanlar ile tekrar tournamentItems listesini dolduruyoruz
           // nextRoundItems listesini boşaltıyorum ki turnuva bitene kadar tekrar doldurup bir sonraki turlara devam edebileyim
           if (items.length == 0) {
-            this.$store.commit('tournament/setQuizItems', this.nextRoundItems)
+            this.$store.commit('tournament/setTournamentItems', this.nextRoundItems)
             items = this.nextRoundItems
 
             // Roundu arttır
             this.round++;
 
-            // nextRoundItems içerisindekileri quizItems'a aktardıktan sonra bu listeyi boşalt. (Tekrar kullanabilmek için)
+            // nextRoundItems içerisindekileri tournamentItems'a aktardıktan sonra bu listeyi boşalt. (Tekrar kullanabilmek için)
             this.nextRoundItems = []
 
             // Seçenekleri temizle
             this.optionA = null
             this.optionB = null
 
-            if (this.quizItems.length > 0) {
-              this.randomizeItems(this.quizItems, num)
+            if (this.tournamentItems.length > 0) {
+              this.randomizeItems(this.tournamentItems, 2)
             }
           }
           // Eğer en son bir eleman kaldıysa o eleman son kalan yani şampiyon demektir
@@ -137,20 +137,18 @@
       // Method 1 gönderildiğinde questionsı return edecek şekilde hazırlanmış.
       // Sorular döndüğünde store'daki state'i güncelliyorum
       let request = 1
-      let quizItems = await this.getQuizItems(request)
-      if (quizItems) {
-        this.$store.commit('tournament/setQuizItems', quizItems)
+      let tournamentItems = await this.getTournamentItems(request)
+      if (tournamentItems) {
+        this.$store.commit('tournament/setTournamentItems', tournamentItems)
 
         // Quizin başlangıçta kaç elemanlı olduğunu tut
-        this.quizLength = quizItems.length;
+        this.tournamentLength = tournamentItems.length;
 
         // Toplam kaç tur süreceğini bul
-        this.totalNumOfRounds = Math.sqrt(this.quizLength);
-        console.log('total num of rounds: ', this.totalNumOfRounds)
-
+        this.totalNumOfRounds = Math.sqrt(this.tournamentLength);
       }
 
-      this.randomizeItems(this.quizItems, 2);
+      this.randomizeItems(this.tournamentItems, 2);
     }
   }
   </script>
