@@ -289,9 +289,6 @@
 
       let quizDetails = await this.getQuizDetails(request)
 
-      console.log('QUESTIONS: ', questions)
-      console.log('QUIZ DETAILS: ', quizDetails)
-
       if (questions && quizDetails) {
         this.$store.commit('basic/setQuizDetails', quizDetails)
         this.$store.commit('basic/setQuestions', questions)

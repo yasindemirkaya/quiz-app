@@ -1,4 +1,10 @@
 export const state = () => ({
+    tournamentDetails: {
+        id: 1,
+        title: 'Tournament 1 Title',
+        description: 'Tournament 1 Description',
+        category: 'Tournament 1 Category'
+    },
     tournamentItems: [
         { id: 1, name: 'Item 1' },
         { id: 2, name: 'Item 2' },
@@ -25,6 +31,9 @@ export const mutations = {
     },
     clearTournamentItems(state) {
         state.tournamentItems = []
+    },
+    setTournamentDetails(state, payload) {
+        state.tournamentDetails = payload
     },
 }
 
@@ -53,9 +62,23 @@ export const actions = {
         } else {
             return false
         }
-    }
+    },
+    async getTournamentDetails({ dispatch, commit, getters, state }, payload) {
+        if (payload == 1) {
+            let details = {
+                id: 1,
+                title: 'Tournament 1 Title',
+                description: 'Tournament 1 Description',
+                category: 'Tournament 1 Category'
+            }
+            return details
+        } else {
+            return false
+        }
+    },
 }
 
 export const getters = {
     tournamentItems: (state) => state.tournamentItems,
+    tournamentDetails: (state) => state.tournamentDetails
 }
