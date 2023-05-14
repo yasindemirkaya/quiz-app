@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <!-- Header -->
-      <div class="col-md-12 d-flex flex-column justify-content-center align-items-center mt-5">
+      <div class="col-md-12 d-flex flex-column justify-content-center align-items-center mt-10rem">
         <h1>Join Quiz App</h1>
         <p>
           Already have an account?
