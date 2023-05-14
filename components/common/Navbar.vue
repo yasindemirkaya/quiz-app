@@ -25,16 +25,21 @@
           <b-nav-item-dropdown right class="me-3">
             <!-- Using 'button-content' slot -->
             <template #button-content>User Menu</template>
+            <!-- Profile Settings -->
             <b-dropdown-item v-if="isLoggedIn" class="text-light">Profile Settings</b-dropdown-item>
+            <!-- Create Quiz -->
             <b-dropdown-item v-if="isLoggedIn" class="text-light">
               <nuxt-link to="/create-quiz" class="text-decoration-none text-muted">Create Quiz</nuxt-link>
             </b-dropdown-item>
+            <!-- Log In -->
             <b-dropdown-item v-if="!isLoggedIn" class="text-light">
               <nuxt-link to="/login" class="text-decoration-none text-muted">Log In</nuxt-link>
             </b-dropdown-item>
+            <!-- Register -->
             <b-dropdown-item v-if="!isLoggedIn">
               <nuxt-link to="/register" class="text-decoration-none text-muted">Register</nuxt-link>
             </b-dropdown-item>
+            <!-- Logout -->
             <b-dropdown-item v-if="isLoggedIn" @click="logout()">Logout</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
@@ -57,7 +62,7 @@
         languages: [
           { id: 1, name: 'Turkish', abbr: 'TR' },
           { id: 2, name: 'English', abbr: 'EN' }
-        ]
+        ],
       }
     },
     computed: {
